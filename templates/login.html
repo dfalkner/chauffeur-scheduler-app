@@ -1,15 +1,31 @@
- <!-- chauffer-scheduler-app/templates/login.html -->
- <!-- Login page template for Chauffeur Scheduler App -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Chauffeur Scheduler App</title>
+</head>
+<body>
+    {% extends 'layout.html' %}
 
- {% extends 'layout.html' %}
-
- {% block content %}
-     <h1>Login</h1>
-     <form method="post">
-         <!-- Login form fields -->
-         <button type="submit">Login</button>
-     </form>
- {% endblock %}<!DOCTYPE html>
+    {% block content %}
+    <div class="login-container">
+        <h1>Login</h1>
+        <form method="post" action="{{ url_for('auth.login') }}">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+    {% endblock %}
+</body>
+</html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
