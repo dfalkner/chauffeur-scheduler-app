@@ -6,6 +6,7 @@ import unittest
 from flask import Flask, template_rendered
 from contextlib import contextmanager
 from modules.auth.views import auth_blueprint
+from unittest.mock import patch
 
 import os
 
@@ -51,6 +52,19 @@ class AuthTestCase(unittest.TestCase):
         # Check for redirection (302) to the owner dashboard
         self.assertEqual(response.status_code, 302)
         self.assertTrue('/owner/dashboard' in response.headers['Location'])
+
+    def test_login_post_failure(self):
+        with captured_templates(app) as templates:
+            response = self.app.post('/auth/login', data=dict(
+                username='wronguser',
+                password='wrongpass'
+            ))
+            self.assertEqual(response.status_code, 200)
+            self.assertEqual(len(templates), 1)
+            template, context = templates[0]
+            self.assertEqual(template.name, 'login.html')
+            # Assuming the template includes an error message for failed logins
+            self.assertIn('error', context)
 
 if __name__ == '__main__':
     unittest.main()
