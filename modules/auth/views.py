@@ -2,8 +2,13 @@
 # Authentication views for Chauffeur Scheduler App
 
 from flask import Blueprint, render_template, request, redirect, url_for
-from flask_cognito import cognito_auth_required, current_cognito_jwt
-# You will need to add the cognito object initialization in your app setup
+from flask_cognito_lib import CognitoAuth
+from flask_cognito_lib.decorators import (
+    auth_required,
+    cognito_login,
+    cognito_login_callback,
+    cognito_logout,
+)
 
 auth_blueprint = Blueprint('auth', __name__)
 
