@@ -24,7 +24,7 @@ Detailed instructions on setting up and running the application will be provided
 Contributions to the Chauffeur-Scheduler-App are welcome! If you're interested in improving the app or adding new features, please feel free to fork the repository, make your changes, and submit a pull request.
 
 ## License
-This project is open source and available under [LICENSE NAME]. For more details, see the LICENSE file in this repository.
+This project is open source and available under GNU General Public License v3.0. For more details, see the LICENSE file in this repository.
 
 ## Contact
 For any queries or suggestions regarding the Chauffeur-Scheduler-App, please reach out through the Issues section of this repository.
