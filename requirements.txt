@@ -1,0 +1,9 @@
+ # chauffer-scheduler-app/requirements.txt
+ # Project dependencies for Chauffeur Scheduler App
+
+Flask==3.0
+Flask-SQLAlchemy==3.1.1
+psycopg2-binary==2.9.9
+boto3==1.29.0
+flask-cognito==1.18
+flask-mail==0.9.1
