@@ -21,7 +21,13 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-        # a simple page that says hello
+    @app.route('/')
+    def index():
+        return 'Welcome to the Chauffeur Scheduler App!'
+
+    @app.route('/dashboard')
+    def dashboard():
+        return 'Dashboard Page'
 
     @app.route('/hello')
     def hello():
