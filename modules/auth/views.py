@@ -18,4 +18,5 @@ def login():
         # Perform login using AWS Cognito
         # You will need to implement the logic to authenticate with AWS Cognito here
         return redirect(url_for('owner.dashboard'))
-    return render_template('login.html')
+    # Redirect to the login page with an error message if login fails
+    return redirect(url_for('auth.login', error='Invalid credentials'))
