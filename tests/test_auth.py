@@ -7,7 +7,10 @@ from flask import Flask, template_rendered
 from contextlib import contextmanager
 from modules.auth.views import auth_blueprint
 
-app = Flask(__name__)
+import os
+
+template_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'templates'))
+app = Flask(__name__, template_folder=template_dir)
 app.register_blueprint(auth_blueprint, url_prefix='/auth')
 from modules.owner.views import owner_blueprint
 app.register_blueprint(owner_blueprint, url_prefix='/owner')
