@@ -36,12 +36,13 @@ class AuthTestCase(unittest.TestCase):
         self.app.testing = True
 
     def test_login_get(self):
-        response = self.app.get('/auth/login')
-        self.assertEqual(response.status_code, 302)
-        self.assertTrue('/auth/login' in response.headers['Location'])
-        self.assertEqual(len(templates), 1)
-        template, context = templates[0]
-        self.assertEqual(template.name, 'login.html')
+        with captured_templates(app) as templates:
+            response = self.app.get('/auth/login')
+            self.assertEqual(response.status_code, 302)
+            self.assertTrue('/auth/login' in response.headers['Location'])
+            self.assertEqual(len(templates), 1)
+            template, context = templates[0]
+            self.assertEqual(template.name, 'login.html')
 
     def test_login_post(self):
         # This test will need to be expanded with logic to mock AWS Cognito authentication
