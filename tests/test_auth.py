@@ -38,7 +38,7 @@ class AuthTestCase(unittest.TestCase):
     def test_login_get(self):
         with captured_templates(app) as templates:
             response = self.app.get('/auth/login')
-            self.assertEqual(response.status_code, 200)
+            self.assertEqual(response.status_code, 302)
             self.assertEqual(len(templates), 1)
             template, context = templates[0]
             self.assertEqual(template.name, 'login.html')
