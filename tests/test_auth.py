@@ -59,12 +59,10 @@ class AuthTestCase(unittest.TestCase):
                 username='wronguser',
                 password='wrongpass'
             ))
+            # Assuming the application redirects to the login page on failure
             self.assertEqual(response.status_code, 302)
-            self.assertEqual(len(templates), 1)
-            template, context = templates[0]
-            self.assertEqual(template.name, 'login.html')
-            # Assuming the template includes an error message for failed logins
-            self.assertIn('error', context)
+            # Check that the Location header is set to the login page with an error message
+            self.assertTrue('/auth/login?error' in response.headers['Location'])
 
 if __name__ == '__main__':
     unittest.main()
