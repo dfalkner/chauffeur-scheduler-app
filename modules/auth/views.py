@@ -14,9 +14,14 @@ auth_blueprint = Blueprint('auth', __name__)
 
 @auth_blueprint.route('/login', methods=['GET', 'POST'])
 def login():
-    if request.method == 'POST':
+    if request.method == 'GET':
+        return render_template('login.html')
+    elif request.method == 'POST':
         # Perform login using AWS Cognito
         # You will need to implement the logic to authenticate with AWS Cognito here
-        return redirect(url_for('owner.dashboard'))
-    # Redirect to the login page with an error message if login fails
-    return redirect(url_for('auth.login', error='Invalid credentials')), 302
+        # If authentication fails, redirect back to the login page with an error
+        # This is a placeholder for the actual authentication logic
+        if False:  # Replace this with the actual condition for a successful login
+            return redirect(url_for('owner.dashboard'))
+        else:
+            return redirect(url_for('auth.login', error='Invalid credentials')), 302
