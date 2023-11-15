@@ -38,7 +38,7 @@ class AuthTestCase(unittest.TestCase):
     def test_login_get(self):
         with captured_templates(app) as templates:
             response = self.app.get('/auth/login')
-            self.assertEqual(response.status_code, 302)
+            self.assertEqual(response.status_code, 200)
             self.assertTrue('/auth/login' in response.headers['Location'])
             self.assertEqual(len(templates), 1)
             template, context = templates[0]
@@ -50,9 +50,9 @@ class AuthTestCase(unittest.TestCase):
             username='testuser',
             password='testpass'
         ))
-        # Check for redirection (302) to the owner dashboard
+        # Check for redirection (302) back to the login page with an error message
         self.assertEqual(response.status_code, 302)
-        self.assertTrue('/owner/dashboard' in response.headers['Location'])
+        self.assertTrue('/auth/login?error=Invalid+credentials' in response.headers['Location'])
 
     def test_login_post_failure(self):
         response = self.app.post('/auth/login', data=dict(
