@@ -1,0 +1,75 @@
+
+This is a simple application being developed in PyCharm Professional.
+
+There will be 3 account types; the sytem administrators, the chauffeurs, and the dispatchers.
+
+User types:
+    system admins:
+        Full administrative access to all app features and confugurations.
+        Can create and edit all chauffeurs and dispatchers.
+        Can create organizations and move users between organizations.
+        Can create and edit vehicle types.
+        Must use credentials to access the app daily.
+
+    dispatchers:
+        Belong to an organization.
+        Must use credentials to access the app yearly.
+        Can reset their password.
+        Can only view, create and edit their organization's schedules.
+        Can invite chauffeurs to self-register their account.
+        Can view the list of chauffeurs and the schedules of the opportunities they have accepted for their organization.
+        Can send their organization's opportunities to one or more chauffeurs in priority order, one chauffer at a time in priority order, waiting for accept or decline, and on a decline the opportunity is sent to the next chauffer according to priority order.
+        Can CRUD opportunities for their organization.
+        Can view a history of their organization's chauffering requests, accepted and declined, and details of the associated opportunities.
+        Can provide a rating and feedback to chauffering upon completion of an opportunity.
+        Can cancel their organization's accepted opportunities. This will notify the chauffer and the dispatcher.
+
+    chauffeurs:
+        Must use credentials to access the app yearly.
+        Can reset their password.
+        Can accept an invitation to self-register their account. They can't create their account until they accept an invitation.
+        Can accept or reject chauffering opportunities, which notifies the dispatcher.
+        Can view their own schedules and accepted opportunities across all organizations.
+        Can view a history of their accepted or declined opportunities, along with their personal notes, feedback received, and details of their accepted opportunities.
+        Can create notes for each opportunity they accept or decline.
+        Can record opportunity status, such as picked-up and dropped-off. Upon acceptance of an opportunity the opportunity status is changed to 'accepted'.
+
+
+    system:
+        Communicates between the dispatchers and chauffeurs.
+        Keeps a history of all chauffering requests, accepted and declined.
+
+Notification will be done via email. Future versions of the app will include SMS.
+
+—————
+Technology Stack:
+
+* User Authentication: AWS Cognito: Utilized for managing user authentication, ensuring secure access for both the owner and scheduler accounts.
+* Web Application Framework: Flask: Chosen for both desktop and mobile browser access, providing a versatile platform for web development.
+* Database Storage: Amazon RDS with PostgreSQL: Selected for its robust features, compatibility with Flask, and availability in a minimal or free tier.
+* Email Notifications: Amazon Simple Email Service (SES): Employed for sending email notifications, an essential part of the app's communication flow.
+* Application Backend: AWS Lambda: A serverless computing service used for running backend code efficiently and cost-effectively, eliminating the need for server management.
+* Data Security and Privacy: AWS IAM (Identity and Access Management): To ensure secure access control and management behind the scenes, without direct user interaction.
+* Deployment: AWS Elastic Beanstalk: Chosen for its ease of use in deploying and scaling web applications. It simplifies infrastructure management, allowing you to focus on development and deployment.
+* Version Control: GitHub: Used for hosting the code repository, with a focus on making the project open source.
+
+This technology stack is designed to keep the application simple, intuitive, and secure, focusing on core functionalities and ensuring a seamless user experience across both desktop and mobile browsers.
+---------
+User Stories for this app, Chauffeur-Scheduler-App
+
+Dispatcher User Story:
+A dispatchers uses a web browser on a phone or desktop to access the application and complete a service request form. The form, requiring fields such as guest name, number of guests, date, pickup time and location, allows for optional inputs like drop-off date and time, drop-off location, special notes, and price. A submit button confirms the form submission.
+
+Upon submission:
+* The dispatchers's history view shows all requests sent to chauffeurs, including timestamps of when each opportunity was accepted or declined. Required fields in this view include the guest name, number of guests, date, pickup time, and location.
+* The dispatcher can add and edit personal notes about chauffer's and opportunities history.
+* A separate view displays current and upcoming opportunities accepted by the chauffer, updated with statuses like 'accepted', 'picked-up', or 'dropped-off', along with corresponding timestamps.
+* When an opportunity concludes (marked 'dropped-off' by the chauffeur), the dispatcher receives an email notifiing the dispatcher the opportunity is complete and can provide feedback to the chauffer regarding that opportunity immediately or at a later time, which is emailed to the chauffeur and stored in chauffer's and dispatcher's history view.
+
+Chauffeur User Story:
+Upon receiving an opportunity request, the chauffeur gets an email with a link to accept (Yes) or decline (No) the request. Their response, along with the time of the response, is emailed back to the dispatchers. Acceptances include all relevant details and a confirmation number.
+
+Owner functionalities:
+* The owner's history view lists all offered opportunities, both accepted and declined, with timestamps. Accepted opportunities display details like confirmation numbers, ride specifics, and any dispatchers feedback.
+* An additional view shows upcoming opportunities with details and timestamps of status updates.
+* The owner can update statuses ('picked-up', 'dropped-off'), with each change timestamped. These updates are emailed to the dispatcher and visible in their view of current and upcoming opportunities.
